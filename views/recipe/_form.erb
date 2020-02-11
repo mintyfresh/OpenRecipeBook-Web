@@ -1,8 +1,20 @@
 <form action="<%= recipe.id ? "/recipes/#{recipe.id}" : '/recipes' %>" method="POST">
   <input type="hidden" name="_method" value="<%= recipe.id ? 'PUT' : 'POST' %>" />
-  <div class="form-group">
-    <label for="recipe[name]">Name:</label>
-    <input type="text" class="form-control" name="recipe[name]" value="<%= recipe.name %>" <%= recipe.id && 'readonly' %> />
+  <div class="row">
+    <div class="col-auto form-group">
+      <label for="recipe[section]">Section:</label>
+      <select class="custom-select" name="recipe[section]" <%= recipe.id && 'disabled' %>>
+      <% sections.each do |section| %>
+        <option value="<%= section %>" <%= recipe.section == section && 'selected' %> style="text-transform: capitalize">
+          <%= section.tr('-', ' ') %>
+        </option>
+      <% end %>
+      </select>
+    </div>
+    <div class="col form-group">
+      <label for="recipe[name]">Name:</label>
+      <input type="text" class="form-control" name="recipe[name]" value="<%= recipe.name %>" <%= recipe.id && 'readonly' %> />
+    </div>
   </div>
   <div class="row">
     <div class="col form-group">

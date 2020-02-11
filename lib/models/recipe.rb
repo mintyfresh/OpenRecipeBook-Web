@@ -4,6 +4,7 @@ module Models
   class Recipe < BaseModel
     include Features::Identifier
 
+    attribute :section, Types::StrippedString
     attribute :name, Types::StrippedString
     attribute :servings, Types::Quantity.optional.default(nil)
     attribute :preptime, Types::NonEmptyString.default(nil)
@@ -14,19 +15,29 @@ module Models
     attribute :directions,  Types::Array.of(RecipeDirection).default([].freeze)
     attribute :tags,        Types::Array.of(Types::StrippedString).default([].freeze)
 
-    # @return [String]
-    def generate_identifier
-      super(name)
+    # @return [Recipe]
+    def self.empty
+      new(section:     '',
+          name:        '',
+          equipment:   [RecipeEquipment.empty],
+          ingredients: [RecipeIngredient.empty],
+          directions:  [RecipeDirection.empty])
     end
 
-    # @return [String, nil]
-    def section
-      return if id.nil?
+    # @param attributes [Hash]
+    # @return [Recipe]
+    def self.new(attributes)
+      if (id = attributes[:id] || attributes['id'])
+        section = id.split('/', 2)[0]
+        super(attributes.merge(section: section))
+      else
+        super(attributes)
+      end
+    end
 
-      fragments = id.split('/', 2)
-      return if fragments.length < 2
-
-      fragments[0]
+    # @return [String]
+    def generate_identifier
+      super(section + '/' + name)
     end
 
     # @return [Hash]
