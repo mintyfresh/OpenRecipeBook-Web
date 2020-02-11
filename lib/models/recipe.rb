@@ -2,7 +2,8 @@
 
 module Models
   class Recipe < BaseModel
-    attribute :id, Types::String.optional.default(nil)
+    include Features::Identifier
+
     attribute :name, Types::String
     attribute :servings, Types::String.optional.default(nil)
     attribute :cooktime, Types::String.optional.default(nil)
@@ -12,5 +13,10 @@ module Models
     attribute :ingredients, Types::Array.of(RecipeIngredient).optional.default([].freeze)
     attribute :directions,  Types::Array.of(RecipeDirection).optional.default([].freeze)
     attribute :tags,        Types::Array.of(Types::String).optional.default([].freeze)
+
+    # @return [String]
+    def generate_identifier
+      super(name)
+    end
   end
 end

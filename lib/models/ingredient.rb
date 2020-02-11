@@ -2,8 +2,14 @@
 
 module Models
   class Ingredient < BaseModel
-    attribute :id, Types::String.optional.default(nil)
+    include Features::Identifier
+
     attribute :name, Types::String
     attribute :products, Types::Array.of(Product).optional.default([].freeze)
+
+    # @return [String]
+    def generate_identifier
+      super(name)
+    end
   end
 end
