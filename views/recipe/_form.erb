@@ -46,7 +46,7 @@
     <% end %>
   </div>
   <button type="button" class="btn btn-outline-secondary mb-3" onclick="addElementToList('ingredients', 'ingredient-template'); scrollIntoView(false)">
-    Add Ingredient
+    Add an Ingredient
   </button>
   <div id="directions">
     <label class="h3">Directions:</label>
@@ -55,7 +55,7 @@
     <% end %>
   </div>
   <button type="button" class="btn btn-outline-secondary" onclick="addElementToList('directions', 'direction-template'); scrollIntoView(false)">
-    Add Direction
+    Add a Step
   </button>
   <% recipe.tags.each do |tag| %>
   <input type="hidden" name="recipe[tags][]" value="<%= tag %>" />
