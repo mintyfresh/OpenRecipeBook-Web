@@ -46,6 +46,9 @@ GEM
     minitest (5.14.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
+    nio4r (2.5.2)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     rack (2.2.2)
     rack-protection (2.0.8.1)
       rack
@@ -83,6 +86,7 @@ DEPENDENCIES
   dry-types
   factory_bot
   faker
+  puma
   rspec
   sinatra
   zeitwerk

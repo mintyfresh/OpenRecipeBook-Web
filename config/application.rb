@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-module Application
+class Application < Sinatra::Base
+  private_class_method :new
+
+  # @return [Zeitwerk::Loader]
   def self.loader
     @loader ||= Zeitwerk::Loader.new
   end
@@ -8,8 +11,4 @@ module Application
   loader.enable_reloading
   loader.push_dir(File.expand_path('../lib', __dir__))
   loader.setup
-end
-
-Dir[File.expand_path('initializers/*.rb', __dir__)].sort.each do |filename|
-  require filename
 end
