@@ -12,6 +12,10 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_bot'
   gem 'faker'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'solargraph', require: false
 end
 
 group :test do
