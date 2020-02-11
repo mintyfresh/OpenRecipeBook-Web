@@ -3,7 +3,7 @@
 module Models
   class RecipeIngredient < BaseModel
     attribute :name, Types::String
-    attribute :quantity, (Types::String | Types::Float).optional.default(nil)
+    attribute :quantity, (Types::Integer | Types::Float | Types::String).optional.default(nil)
     attribute :note, Types::String.optional.default(nil)
   end
 end

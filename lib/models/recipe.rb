@@ -5,7 +5,7 @@ module Models
     include Features::Identifier
 
     attribute :name, Types::String
-    attribute :servings, Types::String.optional.default(nil)
+    attribute :servings, (Types::Integer | Types::Float | Types::String).optional.default(nil)
     attribute :cooktime, Types::String.optional.default(nil)
     attribute :preptime, Types::String.optional.default(nil)
 
@@ -17,6 +17,16 @@ module Models
     # @return [String]
     def generate_identifier
       super(name)
+    end
+
+    # @return [String, nil]
+    def section
+      return if id.nil?
+
+      fragments = id.split('/', 2)
+      return if fragments.length < 2
+
+      fragments[0]
     end
   end
 end
