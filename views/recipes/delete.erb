@@ -1,0 +1,7 @@
+<h1>Delete Recipe: <%= recipe.name %></h1>
+<form method="POST" action="<%= "/recipes/#{recipe.id}" %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <p>Are you sure you want to delete <%= recipe.name %>?</p>
+  <a href="<%= "/recipes/#{recipe.id}" %>" class="btn btn-outline-secondary">Cancel</a>
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>

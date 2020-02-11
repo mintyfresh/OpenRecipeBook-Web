@@ -8,7 +8,7 @@ module Repositories
       def delete(object)
         raise ArgumentError, "#{object.inspect} is not a #{model.name}." unless object.is_a?(model)
 
-        delete_file(ingredient.id + '.yml')
+        delete_file(object.id + '.yml')
       end
     end
   end

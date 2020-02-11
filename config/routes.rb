@@ -18,6 +18,12 @@ $app.get '/recipes/*/edit' do
   erb :'recipes/edit', locals: { recipe: recipes.find(params['splat'][0]), sections: recipes.sections }
 end
 
+$app.get '/recipes/*/delete' do
+  recipes = Repositories::RecipeRepository.new
+
+  erb :'recipes/delete', locals: { recipe: recipes.find(params['splat'][0]) }
+end
+
 $app.get '/recipes/*' do
   recipes = Repositories::RecipeRepository.new
 
@@ -38,4 +44,12 @@ $app.put '/recipes/*' do
   recipes.save(recipe)
 
   redirect to("/recipes/#{recipe.id}")
+end
+
+$app.delete '/recipes/*' do
+  recipes = Repositories::RecipeRepository.new
+  recipe  = recipes.find(params['splat'][0])
+  recipes.delete(recipe)
+
+  redirect to('/recipes')
 end
