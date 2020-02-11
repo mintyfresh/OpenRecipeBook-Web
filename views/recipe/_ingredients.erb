@@ -1,0 +1,15 @@
+<% if ingredients && ingredients.any? %>
+<div id="ingredients">
+  <h2>Ingredients</h2>
+  <ul>
+  <% ingredients.each_with_index do |ingredient, index| %>
+    <li id="ingredients-<%= index %>">
+      <%= ingredient.quantity %>
+      <a href="<%= ingredient.link || '#' %>">
+        <%= ingredient.name %>
+      </a>
+    </li>
+  <% end %>
+  </ul>
+</div>
+<% end %>

@@ -1,0 +1,18 @@
+<h1>Recipe: <%= recipe.name %></h1>
+<dl>
+  <% if recipe.servings %>
+  <dt id="servings">Servings:</dt>
+  <dd><%= recipe.servings %></dd>
+  <% end %>
+  <% if recipe.preptime %>
+  <dt id="preptime">Prep time:</dt>
+  <dd><%= recipe.preptime %></dd>
+  <% end %>
+  <% if recipe.cooktime %>
+  <dt id="cooktime">Cook time:</dt>
+  <dd><%= recipe.cooktime %></dd>
+  <% end %>
+</dl>
+<%= erb :'recipe/_equipment',   locals: { equipment:   recipe.equipment } %>
+<%= erb :'recipe/_ingredients', locals: { ingredients: recipe.ingredients } %>
+<%= erb :'recipe/_directions',  locals: { directions:  recipe.directions } %>

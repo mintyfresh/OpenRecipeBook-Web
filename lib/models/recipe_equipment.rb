@@ -3,6 +3,6 @@
 module Models
   class RecipeEquipment < BaseModel
     attribute :name, Types::String
-    attribute :note, Types::String.optional.default(nil)
+    attribute :link, Types::String.optional.default(nil)
   end
 end
