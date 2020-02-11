@@ -58,7 +58,7 @@ module Repositories
       filepath = directory.join(path)
       validate_path!(filepath)
 
-      File.write(filepath, YAML.dump(data))
+      File.write(filepath, YAML.dump(data, line_width: -1))
     end
 
     # @param path [Pathname]

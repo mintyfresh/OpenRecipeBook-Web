@@ -9,7 +9,10 @@ module Repositories
         raise ArgumentError, "#{object.inspect} is not a #{model.name}." unless object.is_a?(model)
 
         object.generate_identifier if object.id.nil?
-        write_file(object.id + '.yml', object.to_hash)
+        file_name = object.id + '.yml'
+        file_data = object.serializable_hash
+
+        write_file(file_name, file_data)
       end
     end
   end
