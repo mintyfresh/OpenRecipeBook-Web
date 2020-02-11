@@ -15,6 +15,7 @@ class Application < Sinatra::Base
     @root ||= Pathname.new(File.expand_path('..', __dir__)).freeze
   end
 
+  set :method_override, true
   set :views, root.join('views')
 
   loader.enable_reloading

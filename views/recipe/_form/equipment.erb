@@ -1,0 +1,16 @@
+<div class="container row">
+  <div class="col form-group">
+    <label for="recipe[equipment][][name]">Name:</label>
+    <input type="text" name="recipe[equipment][][name]" class="form-control form-control-sm" value="<%= equipment.name %>" />
+  </div>
+  <div class="col form-group">
+    <label for="recipe[equipment][][link]">Link:</label>
+    <input type="text" name="recipe[equipment][][link]" class="form-control form-control-sm" value="<%= equipment.link %>" />
+  </div>
+  <div class="col-auto form-group">
+    <label style="display: block">&nbsp;</label>
+    <button type="button" class="btn btn-sm btn-outline-danger" onclick="this.parentElement.parentElement.remove()">
+      Remove
+    </button>
+  </div>
+</div>
