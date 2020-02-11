@@ -2,7 +2,19 @@
 
 module Models
   class RecipeDirection < BaseModel
-    attribute :step, Types::String
-    attribute :note, Types::String.optional.default(nil)
+    attribute :step, Types::StrippedString
+    attribute :note, Types::NonEmptyString.default(nil)
+
+    # @return [RecipeDirection]
+    def self.empty
+      new(step: '')
+    end
+
+    # @return [Hash]
+    def serializable_hash
+      { 'step' => step,
+        'note' => note }
+        .compact
+    end
   end
 end

@@ -2,7 +2,19 @@
 
 module Models
   class RecipeEquipment < BaseModel
-    attribute :name, Types::String
-    attribute :link, Types::String.optional.default(nil)
+    attribute :name, Types::StrippedString
+    attribute :link, Types::NonEmptyString.default(nil)
+
+    # @return [RecipeEquipment]
+    def self.empty
+      new(name: '')
+    end
+
+    # @return [Hash]
+    def serializable_hash
+      { 'name' => name,
+        'link' => link }
+        .compact
+    end
   end
 end

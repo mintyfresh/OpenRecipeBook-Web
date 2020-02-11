@@ -4,12 +4,19 @@ module Models
   class Equipment < BaseModel
     include Features::Identifier
 
-    attribute :name, Types::String
-    attribute :products, Types::Array.of(Product).optional.default([].freeze)
+    attribute :name, Types::StrippedString
+    attribute :products, Types::Array.of(Product).default([].freeze)
 
     # @return [String]
     def generate_identifier
       super(name)
+    end
+
+    # @return [Hash]
+    def serializable_hash
+      { 'name'     => name,
+        'products' => products.map(&:serializable_hash) }
+        .compact
     end
   end
 end

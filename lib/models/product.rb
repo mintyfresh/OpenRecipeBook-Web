@@ -2,7 +2,14 @@
 
 module Models
   class Product < BaseModel
-    attribute :name, Types::String
-    attribute :stores, Types::Array.of(Store).optional.default([].freeze)
+    attribute :name, Types::StrippedString
+    attribute :stores, Types::Array.of(Store).default([].freeze)
+
+    # @return [Hash]
+    def serializable_hash
+      { 'name'   => name,
+        'stores' => stores.map(&:serializable_hash) }
+        .compact
+    end
   end
 end

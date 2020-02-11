@@ -6,6 +6,34 @@ module Models
 
     module Types
       include Dry.Types
+
+      StrippedString = Types::String.constructor do |value|
+        case value
+        when String
+          value.strip
+        else
+          value
+        end
+      end
+
+      NonEmptyString = StrippedString.optional.constructor do |value|
+        case value
+        when nil
+          nil
+        when String
+          (value = value.strip).empty? ? nil : value
+        else
+          value
+        end
+      end
+
+      Quantity = Types::Coercible::Integer | Types::Coercible::Float | Types::String
+    end
+
+    # @abstract
+    # @return [Hash]
+    def serializable_hash
+      raise NotImplementedError, "#{self.class.name} does not implement #{__method__}."
     end
   end
 end
