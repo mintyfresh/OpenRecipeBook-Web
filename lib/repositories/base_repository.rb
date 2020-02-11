@@ -2,6 +2,8 @@
 
 module Repositories
   class BaseRepository
+    require 'yaml'
+
     DATA_DIR = $app.root.join('book').freeze
 
     # @return [Pathname]

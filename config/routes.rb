@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 $app.get '/recipes' do
-  erb :'recipes/index'
+  recipes = Repositories::RecipeRepository.new
+
+  erb :'recipes/index', locals: { recipes: recipes.all }
 end

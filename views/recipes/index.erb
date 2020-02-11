@@ -1,1 +1,15 @@
-Foo
+<h1>Recipes</h1>
+<% recipes.group_by(&:section).sort.each do |section, recipes_in_section| %>
+  <h2 style="text-transform: capitalize">
+    <%= section %>
+  </h2>
+  <ul>
+  <% recipes_in_section.sort_by(&:name).each do |recipe| %>
+    <li style="text-transform: capitalize">
+      <a href="recipes/<%= recipe.id %>">
+        <%= recipe.name %>
+      </a>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
