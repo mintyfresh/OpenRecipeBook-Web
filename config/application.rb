@@ -3,6 +3,8 @@
 class Application < Sinatra::Base
   private_class_method :new
 
+  set :views, File.expand_path('../views', __dir__)
+
   # @return [Zeitwerk::Loader]
   def self.loader
     @loader ||= Zeitwerk::Loader.new
