@@ -3,8 +3,6 @@
 require 'pathname'
 
 class Application < Sinatra::Base
-  private_class_method :new
-
   # @return [Zeitwerk::Loader]
   def self.loader
     @loader ||= Zeitwerk::Loader.new
@@ -15,6 +13,7 @@ class Application < Sinatra::Base
     @root ||= Pathname.new(File.expand_path('..', __dir__)).freeze
   end
 
+  set :erb, escape_html: true
   set :method_override, true
   set :views, root.join('views')
 

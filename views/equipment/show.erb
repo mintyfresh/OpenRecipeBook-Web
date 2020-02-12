@@ -1,0 +1,22 @@
+<h1>Equipment: <%= equipment.name %></h1>
+<% equipment.products.each do |product| %>
+  <h2><%= product.name %></h2>
+  Purchasing options:
+  <ul>
+  <% product.stores.each do |store| %>
+    <li>
+      <a href="<%= store.link || '#' %>">
+        <%= store.name %>
+      </a>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+<div class="text-right">
+  <a href="<%= "/equipment/#{equipment.id}/edit" %>" class="btn btn-outline-secondary">
+    Edit
+  </a>
+  <a href="<%= "/equipment/#{equipment.id}/delete" %>" class="btn btn-outline-danger">
+    Delete
+  </a>
+</div>

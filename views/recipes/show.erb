@@ -13,9 +13,9 @@
   <dd><%= recipe.cooktime %></dd>
   <% end %>
 </dl>
-<%= erb :'recipe/_equipment',   locals: { equipment:   recipe.equipment } %>
-<%= erb :'recipe/_ingredients', locals: { ingredients: recipe.ingredients } %>
-<%= erb :'recipe/_directions',  locals: { directions:  recipe.directions } %>
+<%== erb :'recipe/_equipment',   locals: { equipment:   recipe.equipment } %>
+<%== erb :'recipe/_ingredients', locals: { ingredients: recipe.ingredients } %>
+<%== erb :'recipe/_directions',  locals: { directions:  recipe.directions } %>
 <div class="text-right">
   <hr>
   <a href="<%= "/recipes/#{recipe.id}/edit" %>" class="btn btn-outline-secondary" role="button">

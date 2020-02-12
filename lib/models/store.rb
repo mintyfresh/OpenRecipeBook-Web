@@ -3,12 +3,12 @@
 module Models
   class Store < BaseModel
     attribute :name, Types::StrippedString
-    attribute :note, Types::NonEmptyString.default(nil)
+    attribute :link, Types::NonEmptyString.default(nil)
 
     # @return [Hash]
     def serializable_hash
       { 'name' => name,
-        'note' => note }
+        'link' => link }
         .compact
     end
   end

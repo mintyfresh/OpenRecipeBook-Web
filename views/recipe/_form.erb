@@ -33,7 +33,7 @@
   <div id="equipment">
     <label class="h3">Equipment:</label>
     <% recipe.equipment&.each do |equipment| %>
-    <%= erb :'recipe/_form/equipment', locals: { equipment: equipment }%>
+    <%== erb :'recipe/_form/equipment', locals: { equipment: equipment }%>
     <% end %>
   </div>
   <button type="button" class="btn btn-outline-secondary mb-3" onclick="addElementToList('equipment', 'equipment-template'); scrollIntoView(false)">
@@ -42,7 +42,7 @@
   <div id="ingredients">
     <label class="h3">Ingredients:</label>
     <% recipe.ingredients&.each do |ingredient| %>
-    <%= erb :'recipe/_form/ingredient', locals: { ingredient: ingredient }%>
+    <%== erb :'recipe/_form/ingredient', locals: { ingredient: ingredient }%>
     <% end %>
   </div>
   <button type="button" class="btn btn-outline-secondary mb-3" onclick="addElementToList('ingredients', 'ingredient-template'); scrollIntoView(false)">
@@ -51,7 +51,7 @@
   <div id="directions">
     <label class="h3">Directions:</label>
     <% recipe.directions&.each do |direction| %>
-    <%= erb :'recipe/_form/direction', locals: { direction: direction }%>
+    <%== erb :'recipe/_form/direction', locals: { direction: direction }%>
     <% end %>
   </div>
   <button type="button" class="btn btn-outline-secondary" onclick="addElementToList('directions', 'direction-template'); scrollIntoView(false)">
@@ -77,11 +77,11 @@
   }
 </script>
 <div id="equipment-template" style="display: none">
-  <%= erb :'recipe/_form/equipment', locals:  { equipment:  Models::RecipeEquipment.empty }  %>
+  <%== erb :'recipe/_form/equipment', locals:  { equipment:  Models::RecipeEquipment.empty }  %>
 </div>
 <div id="ingredient-template" style="display: none">
-  <%= erb :'recipe/_form/ingredient', locals: { ingredient: Models::RecipeIngredient.empty } %>
+  <%== erb :'recipe/_form/ingredient', locals: { ingredient: Models::RecipeIngredient.empty } %>
 </div>
 <div id="direction-template" style="display: none">
-  <%= erb :'recipe/_form/direction', locals:  { direction:  Models::RecipeDirection.empty }  %>
+  <%== erb :'recipe/_form/direction', locals:  { direction:  Models::RecipeDirection.empty }  %>
 </div>

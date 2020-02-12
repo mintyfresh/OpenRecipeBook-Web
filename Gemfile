@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'dry-struct'
 gem 'dry-types'
+gem 'erubis'
 gem 'puma'
 gem 'sinatra'
 gem 'zeitwerk'

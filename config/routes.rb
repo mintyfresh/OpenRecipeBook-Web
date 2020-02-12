@@ -55,3 +55,17 @@ $app.delete '/recipes/:section/:slug' do
 
   redirect to('/recipes')
 end
+
+$app.get '/equipment' do
+  repository = Repositories::EquipmentRepository.new
+  equipment  = repository.all
+
+  erb :'equipment/index', locals: { equipment: equipment }
+end
+
+$app.get '/equipment/:id' do
+  repository = Repositories::EquipmentRepository.new
+  equipment  = repository.find(params['id'])
+
+  erb :'equipment/show', locals: { equipment: equipment }
+end
