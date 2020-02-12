@@ -1,5 +1,5 @@
 <form action="<%= recipe.id ? "/recipes/#{recipe.id}" : '/recipes' %>" method="POST">
-  <input type="hidden" name="_method" value="<%= recipe.id ? 'PUT' : 'POST' %>" />
+  <input type="hidden" name="_method" value="<%= recipe.id ? 'PATCH' : 'POST' %>" />
   <div class="row">
     <div class="col-auto form-group">
       <label for="recipe[section]">Section:</label>

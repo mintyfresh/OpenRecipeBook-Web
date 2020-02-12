@@ -7,8 +7,16 @@ module Repositories
 
     include Features::All
     include Features::Find
-    include Features::Save
+    include Features::Create
+    include Features::Update
     include Features::Delete
+
+    # @param section [String]
+    # @param slug [String]
+    # @return [Models::Recipe]
+    def find(section, slug)
+      super("#{section}/#{slug}")
+    end
 
     # @return [Array<String>]
     def sections
