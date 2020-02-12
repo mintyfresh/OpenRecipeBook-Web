@@ -69,3 +69,17 @@ $app.get '/equipment/:id' do
 
   erb :'equipment/show', locals: { equipment: equipment }
 end
+
+$app.get '/ingredients' do
+  repository  = Repositories::IngredientRepository.new
+  ingredients = repository.all
+
+  erb :'ingredients/index', locals: { ingredients: ingredients }
+end
+
+$app.get '/ingredients/:id' do
+  repository = Repositories::IngredientRepository.new
+  ingredient = repository.find(params['id'])
+
+  erb :'ingredients/show', locals: { ingredient: ingredient }
+end

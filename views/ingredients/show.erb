@@ -1,0 +1,22 @@
+<h1>Ingredient: <%= ingredient.name %></h1>
+<% ingredient.products.each do |product| %>
+  <h2><%= product.name %></h2>
+  Purchasing options:
+  <ul>
+  <% product.stores.each do |store| %>
+    <li>
+      <a href="<%= store.link || '#' %>">
+        <%= store.name %>
+      </a>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+<div class="text-right">
+  <a href="<%= "/ingredients/#{ingredient.id}/edit" %>" class="btn btn-outline-secondary">
+    Edit
+  </a>
+  <a href="<%= "/ingredients/#{ingredient.id}/delete" %>" class="btn btn-outline-danger">
+    Delete
+  </a>
+</div>
