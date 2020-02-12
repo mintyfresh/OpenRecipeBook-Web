@@ -4,5 +4,4 @@
 require_relative '../config/setup'
 require 'irb'
 
-Bundler.require(:development)
 IRB.start(__FILE__)

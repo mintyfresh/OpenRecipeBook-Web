@@ -3,10 +3,11 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH << lib unless $LOAD_PATH.include?(lib)
 
+ENV['RACK_ENV']       ||= 'development'
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __dir__)
 
 require 'bundler/setup'
-Bundler.require(:default)
+Bundler.require(:default, ENV['RACK_ENV'])
 
 # Define global application.
 require_relative 'application'
