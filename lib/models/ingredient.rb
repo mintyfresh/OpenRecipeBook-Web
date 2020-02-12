@@ -8,6 +8,11 @@ module Models
     attribute :products, Types::Array.of(Product).default([].freeze)
 
     # @return [String]
+    def reference
+      "ingredient:#{id}"
+    end
+
+    # @return [String]
     def generate_identifier
       super(name)
     end
