@@ -19,4 +19,4 @@ Dir[File.expand_path('initializers/*.rb', __dir__)].sort.each do |filename|
 end
 
 # Install application routes.
-require_relative 'routes'
+$app.load_routes
