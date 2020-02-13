@@ -16,7 +16,7 @@ module Components
       end
 
       self.template = <<~HTML
-        <div id="ingredient">
+        <div id="ingredient-list">
           <label class="h3">Ingredient:</label>
           <% @recipe_ingredient_list.each do |recipe_ingredient| %>
           <%== embed(Components::RecipeForm::IngredientComponent,

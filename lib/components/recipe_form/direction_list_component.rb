@@ -9,7 +9,7 @@ module Components
       end
 
       self.template = <<~HTML
-        <div id="direction">
+        <div id="direction-list">
           <label class="h3">Directions:</label>
           <% @recipe_direction_list.each do |recipe_direction| %>
           <%== embed(Components::RecipeForm::DirectionComponent,
