@@ -1,4 +1,3 @@
 <h1>Edit Recipe: <%= recipe.name %></h1>
-<%# <%== erb :'recipe/_form', locals: { recipe: recipe, sections: sections } %>
-<%== embed(Components::RecipeFormComponent, recipe: recipe, sections: sections) %>
+<%== draw(Components::RecipeFormComponent, recipe: recipe, sections: sections) %>
 <br>

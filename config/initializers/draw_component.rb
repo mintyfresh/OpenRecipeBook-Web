@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-module ComponentRenderer
+module DrawComponent
   # @param component [Class<Component::BaseComponent>]
   # @param locals [Hash]
   # @return [String]
-  def embed(component, **locals)
+  def draw(component, **locals)
     component.new(**locals).render_component
   end
 end
 
-$app.include(ComponentRenderer)
+$app.include(DrawComponent)

@@ -2,7 +2,7 @@
 
 module Components
   module RecipeForm
-    class DirectionComponent < BaseComponent
+    class DirectionListItemComponent < BaseComponent
       # @param recipe_direction [Models::RecipeDirection]
       def initialize(recipe_direction:)
         @recipe_direction = recipe_direction

@@ -2,7 +2,7 @@
 
 module Components
   module RecipeForm
-    class IngredientComponent < BaseComponent
+    class IngredientListItemComponent < BaseComponent
       # @param recipe_ingredient [Models::RecipeIngredient]
       # @param ingredient_options [Array<Models::Ingredient>]
       def initialize(recipe_ingredient:, ingredient_options:)

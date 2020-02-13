@@ -19,14 +19,14 @@ module Components
         <div id="equipment-list">
           <label class="h3">Equipment:</label>
           <% @recipe_equipment_list.each do |recipe_equipment| %>
-          <%== embed(Components::RecipeForm::EquipmentComponent,
+          <%== draw(Components::RecipeForm::EquipmentListItemComponent,
                     recipe_equipment:  recipe_equipment,
                     equipment_options: equipment_options)
           %>
           <% end %>
         </div>
         <div id="equipment-template" style="display: none">
-          <%== embed(Components::RecipeForm::EquipmentComponent,
+          <%== draw(Components::RecipeForm::EquipmentListItemComponent,
                     recipe_equipment:  Models::RecipeEquipment.empty,
                     equipment_options: equipment_options) %>
         </div>

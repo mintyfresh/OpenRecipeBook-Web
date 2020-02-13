@@ -1,0 +1,27 @@
+<h1>Recipe: <%= @recipe.name %></h1>
+<dl>
+  <% if @recipe.servings %>
+  <dt id="servings">Servings:</dt>
+  <dd><%= @recipe.servings %></dd>
+  <% end %>
+  <% if @recipe.preptime %>
+  <dt id="preptime">Prep time:</dt>
+  <dd><%= @recipe.preptime %></dd>
+  <% end %>
+  <% if @recipe.cooktime %>
+  <dt id="cooktime">Cook time:</dt>
+  <dd><%= @recipe.cooktime %></dd>
+  <% end %>
+</dl>
+<%== draw(Components::Recipe::EquipmentListComponent,  equipment:   @recipe.equipment) %>
+<%== draw(Components::Recipe::IngredientListComponent, ingredients: @recipe.ingredients) %>
+<%== draw(Components::Recipe::DirectionListComponent,  directions:  @recipe.directions) %>
+<div id="recipe-controls" class="text-right">
+  <hr>
+  <a href="<%= "/recipes/#{@recipe.id}/edit" %>" class="btn btn-outline-secondary" role="button">
+    Edit
+  </a>
+  <a href="<%= "/recipes/#{@recipe.id}/delete" %>" class="btn btn-outline-danger" role="button">
+    Delete
+  </a>
+</div>

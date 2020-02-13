@@ -2,7 +2,7 @@
 
 module Components
   class BaseComponent
-    include ComponentRenderer
+    include DrawComponent
 
     class << self
       # @return [String, nil]
@@ -42,7 +42,7 @@ module Components
       elsif (template_file = self.class.template_file)
         @template ||= File.read(template_file)
       else
-        raise(NotImplementedError, "#{name} does not define a template.")
+        raise(NotImplementedError, "#{self.class.name} does not define a template.")
       end
     end
 

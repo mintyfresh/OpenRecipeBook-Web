@@ -2,7 +2,7 @@
 
 module Components
   module RecipeForm
-    class EquipmentComponent < BaseComponent
+    class EquipmentListItemComponent < BaseComponent
       # @param recipe_equipment [Models::RecipeEquipment]
       # @param equipment_options [Array<Models::Equipment>]
       def initialize(recipe_equipment:, equipment_options:)

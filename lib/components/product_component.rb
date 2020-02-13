@@ -12,7 +12,7 @@ module Components
       Purchasing options:
       <ul>
       <% @product.stores.each do |store| %>
-        <li><%== embed(Components::StoreComponent, store: store) %></li>
+        <li><%== draw(Components::StoreComponent, store: store) %></li>
       <% end %>
       </ul>
     HTML

@@ -12,13 +12,13 @@ module Components
         <div id="direction-list">
           <label class="h3">Directions:</label>
           <% @recipe_direction_list.each do |recipe_direction| %>
-          <%== embed(Components::RecipeForm::DirectionComponent,
+          <%== draw(Components::RecipeForm::DirectionListItemComponent,
                     recipe_direction: recipe_direction)
           %>
           <% end %>
         </div>
         <div id="direction-template" style="display: none">
-          <%== embed(Components::RecipeForm::DirectionComponent,
+          <%== draw(Components::RecipeForm::DirectionListItemComponent,
                     recipe_direction: Models::RecipeDirection.empty)
           %>
         </div>

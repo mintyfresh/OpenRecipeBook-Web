@@ -1,6 +1,6 @@
 <h1>Ingredient: <%= ingredient.name %></h1>
 <% ingredient.products.each do |product| %>
-  <%== embed(Components::ProductComponent, product: product) %>
+  <%== draw(Components::ProductComponent, product: product) %>
 <% end %>
 <div class="text-right">
   <a href="<%= url("/ingredients/#{ingredient.id}/edit") %>" class="btn btn-outline-secondary">

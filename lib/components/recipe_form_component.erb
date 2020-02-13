@@ -35,8 +35,8 @@
     </div>
   </div>
   <div id="equipment">
-    <%== embed(Components::RecipeForm::EquipmentListComponent,
-                recipe_equipment_list: @recipe.equipment)
+    <%== draw(Components::RecipeForm::EquipmentListComponent,
+              recipe_equipment_list: @recipe.equipment)
     %>
     <button
       type="button"
@@ -47,8 +47,8 @@
     </button>
   </div>
   <div id="ingredients">
-    <%== embed(Components::RecipeForm::IngredientListComponent,
-                recipe_ingredient_list: @recipe.ingredients)
+    <%== draw(Components::RecipeForm::IngredientListComponent,
+              recipe_ingredient_list: @recipe.ingredients)
     %>
     <button
       type="button"
@@ -59,8 +59,8 @@
     </button>
   </div>
   <div id="directions">
-    <%== embed(Components::RecipeForm::DirectionListComponent,
-                recipe_direction_list: @recipe.directions)
+    <%== draw(Components::RecipeForm::DirectionListComponent,
+              recipe_direction_list: @recipe.directions)
     %>
     <button
       type="button"
