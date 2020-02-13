@@ -56,19 +56,19 @@ module Components
             <input type="text" class="form-control" name="recipe[cooktime]" value="<%= @recipe.cooktime %>" />
           </div>
         </div>
-        <%== embed(Components::RecipeFormEquipmentListComponent,
+        <%== embed(Components::RecipeForm::EquipmentListComponent,
                    recipe_equipment_list: @recipe.equipment)
         %>
         <button type="button" class="btn btn-outline-secondary mb-3" onclick="addElementToList('equipment', 'equipment-template'); scrollIntoView(false)">
           Add Equipment
         </button>
-        <%== embed(Components::RecipeFormIngredientListComponent,
+        <%== embed(Components::RecipeForm::IngredientListComponent,
                    recipe_ingredient_list: @recipe.ingredients)
         %>
         <button type="button" class="btn btn-outline-secondary mb-3" onclick="addElementToList('ingredients', 'ingredient-template'); scrollIntoView(false)">
           Add an Ingredient
         </button>
-        <%== embed(Components::RecipeFormDirectionListComponent,
+        <%== embed(Components::RecipeForm::DirectionListComponent,
                    recipe_direction_list: @recipe.directions)
         %>
         <button type="button" class="btn btn-outline-secondary" onclick="addElementToList('directions', 'direction-template'); scrollIntoView(false)">
