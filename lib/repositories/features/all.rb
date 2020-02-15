@@ -3,9 +3,13 @@
 module Repositories
   module Features
     module All
+      # @param lazy [Boolean]
       # @return [Array<Models::BaseModel>]
-      def all
-        Dir[directory.join('**/*.yml')].map do |filepath|
+      def all(lazy: false)
+        files = Dir[directory.join('**/*.yml')]
+        files = files.lazy if lazy
+
+        files.map do |filepath|
           data = read_file(filepath)
           id   = extract_id_from_filepath(filepath)
 

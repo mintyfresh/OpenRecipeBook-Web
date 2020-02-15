@@ -16,32 +16,29 @@ module Services
 
       query = tokenize(query)
 
-      recipe_repository.all
-        .map { |recipe| SearchResult.new(recipe, 0) }
-        .each(&calculate_score(query))
-        .select(&:match?)
+      recipe_repository.all(lazy: true)
+        .map     { |recipe| calculate_score(recipe, query) }
+        .select  { |result| result.score.positive? }
         .sort_by { |result| -result.score }
         .map(&:recipe)
     end
 
   private
 
-    SearchResult = Struct.new(:recipe, :score) do
-      # @return [Boolean]
-      def match?
-        score.positive?
-      end
-    end
+    SearchResult = Struct.new(:recipe, :score)
 
+    # @param recipe [Models::Recipe]
     # @param query [Array<String>]
-    # @return [Proc]
-    def calculate_score(query)
-      lambda do |result|
-        result.score += score_for_name(result.recipe, query)
-        result.score += score_for_equipment(result.recipe, query)
-        result.score += score_for_ingredients(result.recipe, query)
-        result.score += score_for_tags(result.recipe, query)
-      end
+    # @return [SearchResult]
+    def calculate_score(recipe, query)
+      score = 0
+
+      score += score_for_name(recipe, query)
+      score += score_for_equipment(recipe, query)
+      score += score_for_ingredients(recipe, query)
+      score += score_for_tags(recipe, query)
+
+      SearchResult.new(recipe, score)
     end
 
     # @param recipe [Models::Recipe]
