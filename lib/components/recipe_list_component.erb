@@ -1,0 +1,18 @@
+<h1>Recipes</h1>
+<% recipes_by_section.each do |section, recipes_in_section| %>
+  <h2 style="text-transform: capitalize">
+    <%= section %>
+  </h2>
+  <ul>
+  <% recipes_in_section.each do |recipe| %>
+    <li style="text-transform: capitalize">
+      <a href="recipes/<%= recipe.id %>">
+        <%= recipe.name %>
+      </a>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+<a href="/recipes/new" class="btn btn-outline-secondary">
+  Add New Recipe
+</a>
