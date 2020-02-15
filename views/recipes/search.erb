@@ -1,0 +1,6 @@
+<h1>Search Results</h1>
+<% if recipes && recipes.any? %>
+<%== draw(Components::RecipeListComponent, recipes: recipes) %>
+<% else %>
+Couldn't find any results for: "<%= query %>"
+<% end %>

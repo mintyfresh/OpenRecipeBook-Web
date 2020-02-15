@@ -6,6 +6,14 @@ $app.get '/recipes' do
   erb :'recipes/index', locals: { recipes: recipes.all }
 end
 
+$app.get '/recipes/search' do
+  service = Services::SearchService.new
+  query   = params['query']
+  recipes = service.search(query: query)
+
+  erb :'recipes/search', locals: { query: query, recipes: recipes }
+end
+
 $app.get '/recipes/:section/:slug' do
   recipes = Repositories::RecipeRepository.new
   recipe  = recipes.find(params['section'], params['slug'])
