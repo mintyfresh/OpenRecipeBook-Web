@@ -19,7 +19,7 @@ end
 
 $app.post '/recipes' do
   recipes  = Repositories::RecipeRepository.new
-  contract = Contracts::CreateRecipeContract.new
+  contract = Contracts::RecipeContract.new
   result   = contract.call(request.POST.fetch('recipe'))
 
   if result.success?
@@ -42,7 +42,7 @@ end
 
 $app.patch '/recipes/:section/:slug' do
   recipes  = Repositories::RecipeRepository.new
-  contract = Contracts::CreateRecipeContract.new
+  contract = Contracts::RecipeContract.new
   recipe   = recipes.find(params['section'], params['slug'])
   result   = contract.call(request.POST.fetch('recipe'))
 

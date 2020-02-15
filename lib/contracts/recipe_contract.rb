@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Contracts
-  class CreateRecipeContract < BaseContract
+  class RecipeContract < BaseContract
     option :recipe_repository,     default: -> { Repositories::RecipeRepository.new }
     option :equipment_repository,  default: -> { Repositories::EquipmentRepository.new }
     option :ingredient_repository, default: -> { Repositories::IngredientRepository.new }
