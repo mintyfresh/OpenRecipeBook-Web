@@ -30,6 +30,13 @@ module Models
       Quantity = Types::Coercible::Integer | Types::Coercible::Float | Types::String
     end
 
+    # @param object [Models::BaseModel]
+    # @param new_attributes [Hash]
+    # @return [Models::BaseModel]
+    def self.rebuild(object, new_attributes)
+      new(object.attributes.deep_merge(new_attributes))
+    end
+
     # @abstract
     # @return [Hash]
     def serializable_hash

@@ -4,6 +4,7 @@ ruby '~> 2.6'
 
 source 'https://rubygems.org'
 
+gem 'deepsort'
 gem 'dry-struct'
 gem 'dry-types'
 gem 'dry-validation'

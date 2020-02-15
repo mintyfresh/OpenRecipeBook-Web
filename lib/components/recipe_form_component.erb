@@ -1,14 +1,17 @@
 <form action="<%= http_action %>" method="POST" onsubmit="removeTemplateElements()">
-  <%== form_method(@recipe) %>
+  <%== form_method(recipe) %>
   <div class="row">
     <div class="col-auto form-group">
       <label for="recipe[section]">Section:</label>
-      <select class="custom-select" name="recipe[section]" <%= @recipe.id && 'disabled' %>>
-      <% @sections.each do |section| %>
+      <% if recipe.id %>
+      <input type="hidden" name="recipe[section]" value="<%= recipe.section %>" />
+      <% end %>
+      <select class="custom-select" name="recipe[section]" <%= recipe.id && 'disabled' %>>
+      <% sections.each do |section| %>
         <option
           value="<%= section %>"
           style="text-transform: capitalize"
-          <%= @recipe.section == section && 'selected' %>
+          <%= recipe.section == section && 'selected' %>
         >
           <%= section.tr('-', ' ') %>
         </option>
@@ -19,9 +22,9 @@
       <%== draw(Components::FormControlComponent,
                 label:    'Name:',
                 name:     'recipe[name]',
-                value:    @recipe.name,
-                errors:   @errors[:name],
-                readonly: !!@recipe.id) %>
+                value:    recipe.name,
+                errors:   errors[:name],
+                readonly: !!recipe.id) %>
     </div>
   </div>
   <div class="row">
@@ -29,28 +32,28 @@
       <%== draw(Components::FormControlComponent,
                 label:  'Servings:',
                 name:   'recipe[servings]',
-                value:  @recipe.servings,
-                errors: @errors[:servings]) %>
+                value:  recipe.servings,
+                errors: errors[:servings]) %>
     </div>
     <div class="col form-group">
       <%== draw(Components::FormControlComponent,
                 label:  'Prep time:',
                 name:   'recipe[preptime]',
-                value:  @recipe.preptime,
-                errors: @errors[:preptime]) %>
+                value:  recipe.preptime,
+                errors: errors[:preptime]) %>
     </div>
     <div class="col form-group">
       <%== draw(Components::FormControlComponent,
                 label:  'Cook time:',
                 name:   'recipe[cooktime]',
-                value:  @recipe.cooktime,
-                errors: @errors[:cooktime]) %>
+                value:  recipe.cooktime,
+                errors: errors[:cooktime]) %>
     </div>
   </div>
   <div id="equipment">
     <%== draw(Components::RecipeForm::EquipmentListComponent,
-              recipe_equipment_list: @recipe.equipment,
-              errors:                @errors[:equipment]) %>
+              recipe_equipment_list: recipe.equipment,
+              errors:                errors[:equipment]) %>
     <button
       type="button"
       class="btn btn-outline-secondary mb-3"
@@ -61,8 +64,8 @@
   </div>
   <div id="ingredients">
     <%== draw(Components::RecipeForm::IngredientListComponent,
-              recipe_ingredient_list: @recipe.ingredients,
-              errors:                 @errors[:ingredients]) %>
+              recipe_ingredient_list: recipe.ingredients,
+              errors:                 errors[:ingredients]) %>
     <button
       type="button"
       class="btn btn-outline-secondary mb-3"
@@ -73,8 +76,8 @@
   </div>
   <div id="directions">
     <%== draw(Components::RecipeForm::DirectionListComponent,
-              recipe_direction_list: @recipe.directions,
-              errors:                @errors[:directions]) %>
+              recipe_direction_list: recipe.directions,
+              errors:                errors[:directions]) %>
     <button
       type="button"
       class="btn btn-outline-secondary"
@@ -83,7 +86,7 @@
       Add a Step
     </button>
   </div>
-  <% @recipe.tags.each do |tag| %>
+  <% recipe.tags.each do |tag| %>
   <input type="hidden" name="recipe[tags][]" value="<%= tag %>" />
   <% end %>
   <hr>
@@ -91,7 +94,7 @@
     Cancel
   </a>
   <button type="submit" class="btn btn-primary float-right">
-    <%= @recipe.id ? 'Save Changes' : 'Create Recipe' %>
+    <%= recipe.id ? 'Save Changes' : 'Create Recipe' %>
   </button>
 </form>
 <script>

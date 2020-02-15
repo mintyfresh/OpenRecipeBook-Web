@@ -11,10 +11,10 @@ module Repositories
       def update(object, attributes)
         raise ArgumentError, "#{object.inspect} is not a #{model.name}." unless object.is_a?(model)
 
-        new_object = model.new(object.attributes.merge(attributes))
-        save(new_object) && object.attributes.merge!(new_object.attributes)
+        new_object = model.rebuild(object, attributes)
+        save(new_object)
 
-        object
+        new_object
       end
     end
   end

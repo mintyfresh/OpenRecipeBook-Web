@@ -6,22 +6,23 @@ module Components
 
     include Helpers::FormMethod
 
-    # @param recipe [Models::Recipe]
-    # @param equipment_repository [Repositories::EquipmentRepository]
-    # @param errors [Hash]
-    def initialize(recipe:, sections:, errors: {})
-      @recipe   = recipe
-      @sections = sections
-      @errors   = errors
+    option :recipe
+    option :errors, default: -> { {} }
+    option :recipe_repository, default: -> { Repositories::RecipeRepository.new }
+
+    # @return [Array<String>]
+    def sections
+      @sections ||= recipe_repository.sections.freeze
     end
 
     # @return [String]
     def http_action
-      @recipe.id ? "/recipes/#{@recipe.id}" : '/recipes'
+      recipe.id ? "/recipes/#{recipe.id}" : '/recipes'
     end
 
+    # @return [String]
     def cancel_path
-      @recipe.id ? "/recipes/#{@recipe.id}" : '/recipes'
+      recipe.id ? "/recipes/#{recipe.id}" : '/recipes'
     end
   end
 end
