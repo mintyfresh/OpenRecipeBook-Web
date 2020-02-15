@@ -1,13 +1,1 @@
-<h1>Equipment</h1>
-<ul>
-<% equipment.sort_by(&:name).each do |equipment| %>
-  <li style="text-transform: capitalize">
-    <a href="equipment/<%= equipment.id %>">
-      <%= equipment.name %>
-    </a>
-  </li>
-<% end %>
-</ul>
-<a href="/equipment/new" class="btn btn-outline-secondary">
-  Create New Equipment
-</a>
+<%== draw(Components::EquipmentListComponent, equipment: equipment) %>

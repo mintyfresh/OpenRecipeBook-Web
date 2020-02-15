@@ -1,0 +1,13 @@
+<h1>Igredients</h1>
+<ul>
+<% ingredients.sort_by(&:name).each do |ingredient| %>
+  <li style="text-transform: capitalize">
+    <a href="ingredients/<%= ingredient.id %>">
+      <%= ingredient.name %>
+    </a>
+  </li>
+<% end %>
+</ul>
+<a href="/ingredients/new" class="btn btn-outline-secondary">
+  Add New ingredient
+</a>
