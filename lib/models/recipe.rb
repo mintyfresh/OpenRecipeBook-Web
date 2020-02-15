@@ -4,8 +4,8 @@ module Models
   class Recipe < BaseModel
     include Features::Identifier
 
-    attribute :section, Types::StrippedString
-    attribute :name, Types::StrippedString
+    attribute :section, Types::StrippedString.optional
+    attribute :name, Types::StrippedString.optional
     attribute :servings, Types::Quantity.optional.default(nil)
     attribute :preptime, Types::NonEmptyString.default(nil)
     attribute :cooktime, Types::NonEmptyString.default(nil)

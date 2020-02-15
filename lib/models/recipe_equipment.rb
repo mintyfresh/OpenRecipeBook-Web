@@ -2,7 +2,7 @@
 
 module Models
   class RecipeEquipment < BaseModel
-    attribute :name, Types::StrippedString
+    attribute :name, Types::StrippedString.optional
     attribute :link, Types::NonEmptyString.default(nil)
 
     # @return [RecipeEquipment]

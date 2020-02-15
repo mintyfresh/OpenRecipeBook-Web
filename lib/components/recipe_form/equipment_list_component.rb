@@ -5,9 +5,11 @@ module Components
     class EquipmentListComponent < BaseComponent
       # @param recipe_equipment_list [Array<Models::RecipeEquipment>]
       # @param equipment_repository [Repositories::EquipmentRepository]
-      def initialize(recipe_equipment_list:, equipment_repository: Repositories::EquipmentRepository.new)
+      # @param errors [Hash, nil]
+      def initialize(recipe_equipment_list:, equipment_repository: Repositories::EquipmentRepository.new, errors: {})
         @recipe_equipment_list = recipe_equipment_list
         @equipment_repository  = equipment_repository
+        @errors                = errors || {}
       end
 
       # @return [Array<Models::Equipment>]
@@ -18,10 +20,11 @@ module Components
       self.template = <<~HTML
         <div id="equipment-list">
           <label class="h3">Equipment:</label>
-          <% @recipe_equipment_list.each do |recipe_equipment| %>
+          <% @recipe_equipment_list.each_with_index do |recipe_equipment, index| %>
           <%== draw(Components::RecipeForm::EquipmentListItemComponent,
                     recipe_equipment:  recipe_equipment,
-                    equipment_options: equipment_options)
+                    equipment_options: equipment_options,
+                    errors:            @errors[index])
           %>
           <% end %>
         </div>

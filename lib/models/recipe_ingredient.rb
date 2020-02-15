@@ -2,7 +2,7 @@
 
 module Models
   class RecipeIngredient < BaseModel
-    attribute :name, Types::StrippedString
+    attribute :name, Types::StrippedString.optional.default('')
     attribute :quantity, Types::Quantity.optional.default(nil)
     attribute :link, Types::NonEmptyString.default(nil)
 

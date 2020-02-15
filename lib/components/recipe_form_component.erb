@@ -1,4 +1,4 @@
-<form action="<%= http_action %>" method="POST">
+<form action="<%= http_action %>" method="POST" onsubmit="removeTemplateElements()">
   <%== form_method(@recipe) %>
   <div class="row">
     <div class="col-auto form-group">
@@ -16,28 +16,41 @@
       </select>
     </div>
     <div class="col form-group">
-      <label for="recipe[name]">Name:</label>
-      <input type="text" class="form-control" name="recipe[name]" value="<%= @recipe.name %>" <%= @recipe.id && 'readonly' %> />
+      <%== draw(Components::FormControlComponent,
+                label:    'Name:',
+                name:     'recipe[name]',
+                value:    @recipe.name,
+                errors:   @errors[:name],
+                readonly: !!@recipe.id) %>
     </div>
   </div>
   <div class="row">
     <div class="col form-group">
-      <label for="recipe[servings]">Servings:</label>
-      <input type="text" class="form-control" name="recipe[servings]" value="<%= @recipe.servings %>" />
+      <%== draw(Components::FormControlComponent,
+                label:  'Servings:',
+                name:   'recipe[servings]',
+                value:  @recipe.servings,
+                errors: @errors[:servings]) %>
     </div>
     <div class="col form-group">
-      <label for="recipe[preptime]">Prep time:</label>
-      <input type="text" class="form-control" name="recipe[preptime]" value="<%= @recipe.preptime %>" />
+      <%== draw(Components::FormControlComponent,
+                label:  'Prep time:',
+                name:   'recipe[preptime]',
+                value:  @recipe.preptime,
+                errors: @errors[:preptime]) %>
     </div>
     <div class="col form-group">
-      <label for="recipe[cooktime]">Cook time:</label>
-      <input type="text" class="form-control" name="recipe[cooktime]" value="<%= @recipe.cooktime %>" />
+      <%== draw(Components::FormControlComponent,
+                label:  'Cook time:',
+                name:   'recipe[cooktime]',
+                value:  @recipe.cooktime,
+                errors: @errors[:cooktime]) %>
     </div>
   </div>
   <div id="equipment">
     <%== draw(Components::RecipeForm::EquipmentListComponent,
-              recipe_equipment_list: @recipe.equipment)
-    %>
+              recipe_equipment_list: @recipe.equipment,
+              errors:                @errors[:equipment]) %>
     <button
       type="button"
       class="btn btn-outline-secondary mb-3"
@@ -48,8 +61,8 @@
   </div>
   <div id="ingredients">
     <%== draw(Components::RecipeForm::IngredientListComponent,
-              recipe_ingredient_list: @recipe.ingredients)
-    %>
+              recipe_ingredient_list: @recipe.ingredients,
+              errors:                 @errors[:ingredients]) %>
     <button
       type="button"
       class="btn btn-outline-secondary mb-3"
@@ -60,8 +73,8 @@
   </div>
   <div id="directions">
     <%== draw(Components::RecipeForm::DirectionListComponent,
-              recipe_direction_list: @recipe.directions)
-    %>
+              recipe_direction_list: @recipe.directions,
+              errors:                @errors[:directions]) %>
     <button
       type="button"
       class="btn btn-outline-secondary"
@@ -87,5 +100,11 @@
     const element = document.getElementById(templateSelector).firstElementChild.cloneNode(true);
 
     list.appendChild(element);
+  }
+  function removeTemplateElements() {
+    // Remove template elements to exclude from form submission.
+    document.getElementById('equipment-template').remove();
+    document.getElementById('ingredient-template').remove();
+    document.getElementById('direction-template').remove();
   }
 </script>

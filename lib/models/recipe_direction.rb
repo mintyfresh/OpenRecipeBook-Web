@@ -2,7 +2,7 @@
 
 module Models
   class RecipeDirection < BaseModel
-    attribute :step, Types::StrippedString
+    attribute :step, Types::StrippedString.optional
     attribute :note, Types::NonEmptyString.default(nil)
 
     # @return [RecipeDirection]

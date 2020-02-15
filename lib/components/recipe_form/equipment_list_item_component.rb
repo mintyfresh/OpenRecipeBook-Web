@@ -5,21 +5,22 @@ module Components
     class EquipmentListItemComponent < BaseComponent
       # @param recipe_equipment [Models::RecipeEquipment]
       # @param equipment_options [Array<Models::Equipment>]
-      def initialize(recipe_equipment:, equipment_options:)
+      # @param errors [Hash, nil]
+      def initialize(recipe_equipment:, equipment_options:, errors: {})
         @recipe_equipment  = recipe_equipment
         @equipment_options = equipment_options
+        @errors            = errors || {}
       end
 
       self.template = <<~HTML
         <div class="container row">
           <div class="col form-group">
-            <label for="recipe[equipment][][name]">Name:</label>
-            <input
-              type="text"
-              name="recipe[equipment][][name]"
-              class="form-control form-control-sm"
-              value="<%= @recipe_equipment.name %>"
-            />
+            <%== draw(Components::FormControlComponent,
+                      label:  'Name:',
+                      name:   'recipe[equipment][][name]',
+                      value:  @recipe_equipment.name,
+                      errors: @errors[:name])
+            %>
           </div>
           <div class="col form-group">
             <label for="recipe[equipment][][link]">Link:</label>

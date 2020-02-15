@@ -4,6 +4,8 @@ module Components
   class BaseComponent
     include DrawComponent
 
+    extend Dry::Initializer
+
     class << self
       # @return [String, nil]
       attr_reader :template

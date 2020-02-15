@@ -5,9 +5,11 @@ module Components
     class IngredientListComponent < BaseComponent
       # @param recipe_ingredient_list [Array<Models::RecipeIngredient>]
       # @param ingredient_repository [Repositories::IngredientRepository]
-      def initialize(recipe_ingredient_list:, ingredient_repository: Repositories::IngredientRepository.new)
+      # @param errors [Hash, nil]
+      def initialize(recipe_ingredient_list:, ingredient_repository: Repositories::IngredientRepository.new, errors: {})
         @recipe_ingredient_list = recipe_ingredient_list
         @ingredient_repository  = ingredient_repository
+        @errors                 = errors || {}
       end
 
       # @return [Array<Models::Ingredient>]
@@ -18,10 +20,11 @@ module Components
       self.template = <<~HTML
         <div id="ingredient-list">
           <label class="h3">Ingredient:</label>
-          <% @recipe_ingredient_list.each do |recipe_ingredient| %>
+          <% @recipe_ingredient_list.each_with_index do |recipe_ingredient, index| %>
           <%== draw(Components::RecipeForm::IngredientListItemComponent,
                     recipe_ingredient:  recipe_ingredient,
-                    ingredient_options: ingredient_options)
+                    ingredient_options: ingredient_options,
+                    errors:             @errors[index])
           %>
           <% end %>
         </div>

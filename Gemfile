@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 
 gem 'dry-struct'
 gem 'dry-types'
+gem 'dry-validation'
 gem 'erubis'
 gem 'puma'
 gem 'sinatra'

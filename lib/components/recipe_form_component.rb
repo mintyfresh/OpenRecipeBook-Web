@@ -8,9 +8,11 @@ module Components
 
     # @param recipe [Models::Recipe]
     # @param equipment_repository [Repositories::EquipmentRepository]
-    def initialize(recipe:, sections:)
+    # @param errors [Hash]
+    def initialize(recipe:, sections:, errors: {})
       @recipe   = recipe
       @sections = sections
+      @errors   = errors
     end
 
     # @return [String]

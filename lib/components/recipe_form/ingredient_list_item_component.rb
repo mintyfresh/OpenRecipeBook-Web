@@ -5,30 +5,30 @@ module Components
     class IngredientListItemComponent < BaseComponent
       # @param recipe_ingredient [Models::RecipeIngredient]
       # @param ingredient_options [Array<Models::Ingredient>]
-      def initialize(recipe_ingredient:, ingredient_options:)
+      # @param errors [Hash, nil]
+      def initialize(recipe_ingredient:, ingredient_options:, errors: {})
         @recipe_ingredient  = recipe_ingredient
         @ingredient_options = ingredient_options
+        @errors             = errors || {}
       end
 
       self.template = <<~HTML
         <div class="container row">
           <div class="col form-group">
-            <label for="recipe[ingredient][][name]">Name:</label>
-            <input
-              type="text"
-              name="recipe[ingredient][][name]"
-              class="form-control form-control-sm"
-              value="<%= @recipe_ingredient.name %>"
-            />
+            <%== draw(Components::FormControlComponent,
+                      label:  'Name:',
+                      name:   'recipe[ingredients][][name]',
+                      value:  @recipe_ingredient.name,
+                      errors: @errors[:name])
+            %>
           </div>
           <div class="col form-group">
-            <label for="recipe[ingredients][][quantity]">Quantity:</label>
-            <input
-              type="text"
-              name="recipe[ingredients][][quantity]"
-              class="form-control form-control-sm"
-              value="<%= @recipe_ingredient.quantity %>"
-            />
+            <%== draw(Components::FormControlComponent,
+                      label:  'Quantity:',
+                      name:   'recipe[ingredients][][quantity]',
+                      value:  @recipe_ingredient.quantity,
+                      errors: @errors[:quantity])
+            %>
           </div>
           <div class="col form-group">
             <label for="recipe[ingredient][][link]">Link:</label>

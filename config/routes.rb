@@ -16,14 +16,23 @@ end
 $app.get '/recipes/new' do
   recipes = Repositories::RecipeRepository.new
 
-  erb :'recipes/new', locals: { recipe: Models::Recipe.empty, sections: recipes.sections }
+  erb :'recipes/new', locals: { recipe: Models::Recipe.empty, sections: recipes.sections, errors: {} }
 end
 
 $app.post '/recipes' do
-  recipes = Repositories::RecipeRepository.new
-  recipe  = recipes.create(request.POST.fetch('recipe'))
+  recipes  = Repositories::RecipeRepository.new
+  contract = Contracts::CreateRecipeContract.new
+  result   = contract.call(request.POST.fetch('recipe'))
 
-  redirect to("/recipes/#{recipe.id}")
+  if result.success?
+    recipe = recipes.create(result.to_h)
+
+    redirect to("/recipes/#{recipe.id}")
+  else
+    recipe = Models::Recipe.new(result.to_h)
+
+    erb :'recipes/new', locals: { recipe: recipe, sections: recipes.sections, errors: result.errors }
+  end
 end
 
 $app.get '/recipes/:section/:slug/edit' do
