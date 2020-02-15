@@ -4,6 +4,9 @@ module Services
   class SearchService
     extend Dry::Initializer
 
+    TOKEN_DELIMITER = /\b/.freeze
+    TOKEN_FILTER    = /\w+/.freeze
+
     option :recipe_repository, default: -> { Repositories::RecipeRepository.new }
 
     # @param query [String, nil]
@@ -85,7 +88,7 @@ module Services
     # @param text [String]
     # @return [Array<String>]
     def tokenize(text)
-      text.downcase.split(/\b/).map(&:strip).select { |w| /\w+/.match?(w) }
+      text.downcase.split(TOKEN_DELIMITER).map(&:strip).select { |w| TOKEN_FILTER.match?(w) }
     end
   end
 end
