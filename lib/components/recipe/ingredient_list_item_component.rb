@@ -3,23 +3,19 @@
 module Components
   module Recipe
     class IngredientListItemComponent < BaseComponent
-      # @param ingredient [Array<Models::RecipeIngredient>]
-      # @param index [Integer, nil]
-      def initialize(ingredient:, index: nil)
-        @ingredient = ingredient
-        @index      = index
-      end
+      option :ingredient
+      option :index, default: -> { nil }
 
       # @return [String]
       def id
-        @index && "id=\"ingredient-#{@index}\""
+        index && "id=\"ingredient-#{index}\""
       end
 
       self.template = <<~HTML
         <li <%== id %>>
-          <%= @ingredient.quantity %>
-          <a href="<%= @ingredient.link || '#' %>">
-            <%= @ingredient.name %>
+          <%= ingredient.quantity %>
+          <a href="<%= ingredient.link || '#' %>">
+            <%= ingredient.name %>
           </a>
         </li>
       HTML

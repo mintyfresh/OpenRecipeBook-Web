@@ -4,8 +4,6 @@ module Components
   class RecipeComponent < BaseComponent
     self.template_file = root.join('recipe_component.erb')
 
-    def initialize(recipe:)
-      @recipe = recipe
-    end
+    option :recipe
   end
 end

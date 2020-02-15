@@ -3,17 +3,14 @@
 module Components
   module Recipe
     class EquipmentListComponent < BaseComponent
-      # @param equipment [Array<Models::RecipeEquipment>]
-      def initialize(equipment:)
-        @equipment = equipment
-      end
+      option :equipment
 
       self.template = <<~HTML
-        <% if @equipment && @equipment.any? %>
+        <% if equipment && equipment.any? %>
         <div id="equipment-list">
           <h2>Equipment</h2>
           <ul>
-          <% @equipment.each_with_index do |equipment, index| %>
+          <% equipment.each_with_index do |equipment, index| %>
             <%== draw(Components::Recipe::EquipmentListItemComponent, equipment: equipment, index: index) %>
           <% end %>
           </ul>

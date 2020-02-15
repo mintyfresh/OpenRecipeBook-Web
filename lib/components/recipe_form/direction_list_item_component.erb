@@ -1,0 +1,26 @@
+<div class="container row">
+  <div class="col form-group">
+    <%== draw(Components::FormControlComponent,
+              label:  'Step:',
+              type:   'textarea',
+              name:   'recipe[directions][][step]',
+              value:  direction.step,
+              errors: errors && errors[:step])
+    %>
+  </div>
+  <div class="col form-group">
+    <%== draw(Components::FormControlComponent,
+              label:  'Note:',
+              type:   'textarea',
+              name:   'recipe[directions][][note]',
+              value:  direction.note,
+              errors: errors && errors[:note])
+    %>
+  </div>
+  <div class="col-auto">
+    <label style="display: block">&nbsp;</label>
+    <button type="button" class="btn btn-outline-danger" onclick="this.parentElement.parentElement.remove()">
+      Remove
+    </button>
+  </div>
+</div>

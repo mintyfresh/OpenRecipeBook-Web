@@ -2,10 +2,7 @@
 
 module Components
   class StoreComponent < BaseComponent
-    # @param store [Models::Store]
-    def initialize(store:)
-      @store = store
-    end
+    option :store
 
     self.template = <<~HTML
       <a href="<%= @store.link || '#' %>">

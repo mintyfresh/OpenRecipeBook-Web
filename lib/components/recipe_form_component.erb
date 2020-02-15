@@ -23,7 +23,7 @@
                 label:    'Name:',
                 name:     'recipe[name]',
                 value:    recipe.name,
-                errors:   errors[:name],
+                errors:   errors && errors[:name],
                 readonly: !!recipe.id) %>
     </div>
   </div>
@@ -33,27 +33,27 @@
                 label:  'Servings:',
                 name:   'recipe[servings]',
                 value:  recipe.servings,
-                errors: errors[:servings]) %>
+                errors: errors && errors[:servings]) %>
     </div>
     <div class="col form-group">
       <%== draw(Components::FormControlComponent,
                 label:  'Prep time:',
                 name:   'recipe[preptime]',
                 value:  recipe.preptime,
-                errors: errors[:preptime]) %>
+                errors: errors && errors[:preptime]) %>
     </div>
     <div class="col form-group">
       <%== draw(Components::FormControlComponent,
                 label:  'Cook time:',
                 name:   'recipe[cooktime]',
                 value:  recipe.cooktime,
-                errors: errors[:cooktime]) %>
+                errors: errors && errors[:cooktime]) %>
     </div>
   </div>
   <div id="equipment">
     <%== draw(Components::RecipeForm::EquipmentListComponent,
-              recipe_equipment_list: recipe.equipment,
-              errors:                errors[:equipment]) %>
+              equipment: recipe.equipment,
+              errors:    errors && errors[:equipment]) %>
     <button
       type="button"
       class="btn btn-outline-secondary mb-3"
@@ -64,8 +64,8 @@
   </div>
   <div id="ingredients">
     <%== draw(Components::RecipeForm::IngredientListComponent,
-              recipe_ingredient_list: recipe.ingredients,
-              errors:                 errors[:ingredients]) %>
+              ingredients: recipe.ingredients,
+              errors:      errors && errors[:ingredients]) %>
     <button
       type="button"
       class="btn btn-outline-secondary mb-3"
@@ -76,8 +76,8 @@
   </div>
   <div id="directions">
     <%== draw(Components::RecipeForm::DirectionListComponent,
-              recipe_direction_list: recipe.directions,
-              errors:                errors[:directions]) %>
+              directions: recipe.directions,
+              errors:     errors && errors[:directions]) %>
     <button
       type="button"
       class="btn btn-outline-secondary"

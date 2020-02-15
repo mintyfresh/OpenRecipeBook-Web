@@ -2,19 +2,8 @@
 
 module Components
   class ProductComponent < BaseComponent
-    # @param product [Models::Product]
-    def initialize(product:)
-      @product = product
-    end
+    self.template_file = root.join('product_component.erb')
 
-    self.template = <<~HTML
-      <h2><%= @product.name %></h2>
-      Purchasing options:
-      <ul>
-      <% @product.stores.each do |store| %>
-        <li><%== draw(Components::StoreComponent, store: store) %></li>
-      <% end %>
-      </ul>
-    HTML
+    option :product
   end
 end
