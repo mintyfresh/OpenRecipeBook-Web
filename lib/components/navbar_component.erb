@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      Open Recipe Book
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <%== draw(Components::Navbar::NavLinkComponent, href: '/recipes', label: 'Recipes') %>
+        <%== draw(Components::Navbar::NavLinkComponent, href: '/equipment', label: 'Equipment') %>
+        <%== draw(Components::Navbar::NavLinkComponent, href: '/ingredients', label: 'Ingredients') %>
+      </ul>
+      <%== draw(Components::Navbar::NavSearchComponent) %>
+    </div>
+  </div>
+</nav>
