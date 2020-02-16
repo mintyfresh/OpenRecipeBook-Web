@@ -10,6 +10,7 @@ gem 'dry-types'
 gem 'dry-validation'
 gem 'erubis'
 gem 'puma'
+gem 'git'
 gem 'sinatra'
 gem 'zeitwerk'
 

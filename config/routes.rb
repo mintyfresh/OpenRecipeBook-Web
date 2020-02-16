@@ -1,5 +1,36 @@
 # frozen_string_literal: true
 
+$app.before do
+  book = Services::BookService.new
+  pass if book.exists? || request.path_info == '/setup'
+
+  redirect to('/setup')
+end
+
+$app.get '/setup' do
+  book = Services::BookService.new
+
+  if book.exists?
+    redirect to('/recipes')
+  else
+    erb :setup, locals: { errors: {} }
+  end
+end
+
+$app.post '/setup' do
+  book     = Services::BookService.new
+  contract = Contracts::SetupContract.new
+  result   = contract.call(request.POST.fetch('setup'))
+
+  if result.success?
+    book.clone(**result.to_h)
+
+    redirect to('/recipes')
+  else
+    erb :setup, locals: { errors: result.errors }
+  end
+end
+
 $app.get '/recipes' do
   recipes = Repositories::RecipeRepository.new
 

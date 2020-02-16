@@ -1,0 +1,28 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
+    <div class="card">
+      <h5 class="card-header">
+        Configure Recipe Book
+      </h5>
+      <div class="card-body">
+        <form method="POST" action="/setup">
+          <div class="form-group">
+            <%== draw(Components::FormControlComponent,
+                      label:  'Git URL:',
+                      name:   'setup[git_url]',
+                      errors: errors && errors[:git_url]) %>
+          <p class="text-muted">
+            This should be the URL of your OpenRecipeBook fork.
+            It will be cloned into the <code>book/</code> directory at the root of the UI folder.
+          </p>
+          </div>
+          <div class="text-right">
+            <button type="submit" class="btn btn-primary">
+              Clone
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
