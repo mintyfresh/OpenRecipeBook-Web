@@ -6,6 +6,8 @@ A lightweight, browser based UI for the OpenRecipeBook project.
 These instructions assume you already have Ruby and Bundler installed. The first is to install the bundle:
 
     $ bundle install
+    
+If you don't have Ruby, you can find installation instructions on the [Ruby website](https://www.ruby-lang.org/en/downloads/).
 
 # Starting the Web UI
 To use the web UI, the local web server must be running. Start is using:
