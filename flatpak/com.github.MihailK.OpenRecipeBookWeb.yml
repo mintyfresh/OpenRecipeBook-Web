@@ -102,7 +102,7 @@ modules:
   - name: orb
     build-commands:
       - bundle install --local
-      - cp -ra * ${FLATPAK_DEST}
+      - cp -ra bin config Gemfile Gemfile.lock lib LICENSE views ${FLATPAK_DEST}
       - cp launch ${FLATPAK_DEST}/bin
     buildsystem: simple
     sources:
@@ -116,5 +116,6 @@ modules:
         dest-filename: launch
       - type: git
         url: ".."
-        commit: e8e8ba636e5c29bb3d2531938f5f8ed4d1381c5e
+        branch: flatpak
+        #commit: e8e8ba636e5c29bb3d2531938f5f8ed4d1381c5e
       - gems.yml
