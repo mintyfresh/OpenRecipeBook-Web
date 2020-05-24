@@ -6,7 +6,7 @@ module Services
     puts BOOK_DIR
     # @param git_url [String]
     def clone(git_url:)
-      Git.clone(git_url, $app.root.join('book'))
+      Git.clone(git_url, BOOK_DIR)
     end
 
     # @return [Boolean]
