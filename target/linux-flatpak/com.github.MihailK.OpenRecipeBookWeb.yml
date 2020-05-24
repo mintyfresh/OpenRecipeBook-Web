@@ -115,7 +115,5 @@ modules:
           - wait $PID
         dest-filename: launch
       - type: git
-        url: ".."
-        branch: flatpak
-        #commit: e8e8ba636e5c29bb3d2531938f5f8ed4d1381c5e
+        url: ../..
       - gems.yml
