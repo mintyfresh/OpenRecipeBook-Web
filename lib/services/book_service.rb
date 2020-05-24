@@ -2,7 +2,7 @@
 
 module Services
   class BookService
-    BOOK_DIR = $app.root.join('book').freeze
+    BOOK_DIR = ENV.fetch('XDG_DATA_HOME') { $app.root.join('book').freeze }
 
     # @param git_url [String]
     def clone(git_url:)
