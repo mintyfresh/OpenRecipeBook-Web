@@ -4,7 +4,7 @@ module Repositories
   class BaseRepository
     require 'yaml'
 
-    Pathname.new(ENV.fetch('XDG_DATA_HOME') { $app.root.join('book') }).freeze
+    BOOK_DIR = Pathname.new(ENV.fetch('XDG_DATA_HOME') { $app.root }).join('book').freeze
 
     # @return [Pathname]
     def self.directory
