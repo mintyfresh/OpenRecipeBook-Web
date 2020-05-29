@@ -7,7 +7,8 @@ module Repositories
 
     include Features::All
     include Features::Find
-    include Features::Save
+    include Features::Create
+    include Features::Update
     include Features::Delete
   end
 end
