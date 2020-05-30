@@ -1,0 +1,23 @@
+<div class="mb-2">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-6 form-group">
+        <%== draw(Components::FormControlComponent,
+                  label:  'Name:',
+                  name:   'ingredient[products][][stores][][name]',
+                  value:  store.name,
+                  errors: errors && errors[:name]) %>
+      </div>
+      <div class="col-6 form-group">
+        <%== draw(Components::FormControlComponent,
+                  label:  'Link:',
+                  name:   'ingredient[products][][stores][][link]',
+                  value:  store.link,
+                  errors: errors && errors[:link]) %>
+      </div>
+    </div>
+    <button type="button" class="btn btn-danger" onclick="this.parentElement.parentElement.remove()">
+      Remove Store
+    </button>
+  </li>
+</div>

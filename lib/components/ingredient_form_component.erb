@@ -1,0 +1,51 @@
+<form action="<%= http_action %>" method="POST">
+  <%== form_method(ingredient) %>
+  <div class="form-group">
+    <%== draw(Components::FormControlComponent,
+              label:  'Name:',
+              name:   'ingredient[name]',
+              value:  ingredient.name,
+              errors: errors && errors[:name]) %>
+  </div>
+  <label>Products:</label>
+  <ul id="product-list" class="list-group">
+  <% ingredient.products.each_with_index do |product, product_index| %>
+    <%== draw(Components::ProductListItemComponent,
+              product:       product,
+              product_index: product_index,
+              errors:        errors && errors.dig(:products, product_index)) %>
+  <% end %>
+  </ul>
+  <div class="text-right">
+    <button type="button" class="btn btn-outline-secondary mt-2" onclick="addElementToList(document.getElementById('product-list'), 'product-list-item-template')">
+      Add Product
+    </button>
+  </div>
+  <hr>
+  <div class="text-right">
+    <a href="<%= cancel_path %>" class="btn btn-outline-secondary float-left">
+      Cancel
+    </a>
+    <button type="submit" class="btn btn-primary">
+      <%= ingredient.id ? 'Save Changes' : 'Create Ingredient' %>
+    </button>
+  </div>
+</form>
+<div id="product-list-item-template" style="display: none;">
+  <%== draw(Components::ProductListItemComponent, product: Models::Product.empty) %>
+</div>
+<div id="store-list-item-template" style="display: none;">
+  <%== draw(Components::StoreListItemComponent, store: Models::Store.empty) %>
+</div>
+<script>
+  function addElementToList(listElement, templateSelector) {
+    const element = document.getElementById(templateSelector).firstElementChild.cloneNode(true);
+
+    listElement.appendChild(element);
+  }
+  function removeTemplateElements() {
+    // Remove template elements to exclude from form submission.
+    document.getElementById('product-list-item-template').remove();
+    document.getElementById('store-list-item-template').remove();
+  }
+</script>

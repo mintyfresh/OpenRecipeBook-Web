@@ -132,6 +132,50 @@ $app.get '/ingredients' do
   erb :'ingredients/index', locals: { ingredients: ingredients }
 end
 
+$app.get '/ingredients/new' do
+  erb :'ingredients/new', locals: { ingredient: Models::Ingredient.empty, errors: {} }
+end
+
+$app.post '/ingredients' do
+  contract   = Contracts::IngredientContract.new
+  repository = Repositories::IngredientRepository.new
+  result     = contract.call(request.POST.fetch('ingredient'))
+
+  if result.success?
+    ingredient = repository.create(result.to_h)
+
+    redirect to("/ingredients/#{ingredient.id}")
+  else
+    ingredient = Models::Ingredient.new(result.to_h)
+
+    erb :'ingredients/new', locals: { ingredient: ingredient, errors: result.errors.to_h }
+  end
+end
+
+$app.get '/ingredients/:id/edit' do
+  repository = Repositories::IngredientRepository.new
+  ingredient = repository.find(params['id'])
+
+  erb :'ingredients/edit', locals: { ingredient: ingredient, errors: {} }
+end
+
+$app.patch '/ingredients/:id' do
+  contract   = Contracts::IngredientContract.new
+  repository = Repositories::IngredientRepository.new
+  ingredient = repository.find(params['id'])
+  result     = contract.call(request.POST.fetch('ingredient'))
+
+  if result.success?
+    ingredient = repository.update(ingredient, result.to_h)
+
+    redirect to("/ingredients/#{ingredient.id}")
+  else
+    ingredient = Models::Ingredient.rebuild(ingredient, result.to_h)
+
+    erb :'ingredients/edit', locals: { ingredient: ingredient, errors: result.errors.to_h }
+  end
+end
+
 $app.get '/ingredients/:id' do
   repository = Repositories::IngredientRepository.new
   ingredient = repository.find(params['id'])

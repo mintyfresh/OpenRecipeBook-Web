@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Contracts
-  class RecipeContract < BaseContract
+  class IngredientContract < BaseContract
     params do
       required(:name).filled(:string)
 

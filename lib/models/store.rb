@@ -5,6 +5,11 @@ module Models
     attribute :name, Types::StrippedString
     attribute :link, Types::NonEmptyString.default(nil)
 
+    # @return [Store]
+    def self.empty
+      new(name: '', link: nil)
+    end
+
     # @return [Hash]
     def serializable_hash
       { 'name' => name,

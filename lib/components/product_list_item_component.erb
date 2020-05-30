@@ -1,0 +1,28 @@
+<div class="mb-2">
+  <li class="list-group-item">
+    <div class="form-group">
+      <%== draw(Components::FormControlComponent,
+                label:  'Name:',
+                name:   'ingredient[products][][name]',
+                value:  product.name,
+                errors: errors && errors.dig(:name)) %>
+    </div>
+    <label>Stores:</label>
+    <ul class="list-group">
+    <% product.stores.each_with_index do |store, store_index| %>
+      <%== draw(Components::StoreListItemComponent,
+                store:  store,
+                errors: errors && errors.dig(:stores, store_index)) %>
+    <% end %>
+    </ul>
+    <div class="text-right">
+      <button type="button" class="btn btn-danger float-left" onclick="this.parentElement.parentElement.parentElement.remove()">
+        Remove Product
+      </button>
+      <button type="button" class="btn btn-outline-secondary"
+              onclick="addElementToList(this.parentElement.parentElement.querySelector('ul.list-group'), 'store-list-item-template')">
+        Add Store
+      </button>
+    </div>
+  </li>
+</div>

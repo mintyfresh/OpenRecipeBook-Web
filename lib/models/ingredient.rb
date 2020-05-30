@@ -7,6 +7,12 @@ module Models
     attribute :name, Types::StrippedString
     attribute :products, Types::Array.of(Product).default([].freeze)
 
+    # @return [Ingredient]
+    def self.empty
+      new(name:     '',
+          products: [Product.empty])
+    end
+
     # @return [String]
     def reference
       "ingredient:#{id}"
