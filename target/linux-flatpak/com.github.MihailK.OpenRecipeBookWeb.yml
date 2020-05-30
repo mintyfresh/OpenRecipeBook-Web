@@ -1,0 +1,119 @@
+app-id: com.github.MihailK.OpenRecipeBookWeb
+branch: master
+runtime: org.freedesktop.Platform
+runtime-version: '19.08'
+separate-locales: false
+sdk: org.freedesktop.Sdk
+finish-args:
+  - --share=network
+command: launch
+cleanup:
+  - /bin/reverse_markdown
+  - /bin/racc
+  - /bin/thor
+  - /bin/erb
+  - /bin/y2racc
+  - /bin/rubocop
+  - /bin/maruku
+  - /bin/tilt
+  - /bin/solargraph
+  - /bin/yardoc
+  - /bin/ruby-parse
+  - /bin/ldiff
+  - /bin/bundler
+  - /bin/htmldiff
+  - /bin/nokogiri
+  - /bin/bundle
+  - /bin/racc2y
+  - /bin/console
+  - /bin/puma
+  - /bin/yri
+  - /bin/ri
+  - /bin/ruby-rewrite
+  - /bin/erubis
+  - /bin/marutex
+  - /bin/rackup
+  - /bin/irb
+  - /bin/rdoc
+  - /bin/faker
+  - /bin/gem
+  - /bin/rake
+  - /bin/yard
+  - /bin/byebug
+  - /bin/rspec
+  - /bin/pumactl
+  - /lib/debug
+  - /lib/pkgconfig
+  - /lib/libruby-static.a
+  - /lib/ruby/2.7.0/rdoc*
+  - /lib/ruby/2.7.0/irb*
+  - /lib/ruby/gems/2.7.0/build_info
+  - /lib/ruby/gems/2.7.0/cache
+  - /lib/ruby/gems/2.7.0/doc
+  - /lib/ruby/site_ruby
+  - /lib/ruby/vendor_ruby
+  - /include
+  - /vendor
+  - /share/doc
+  - /share/ri
+  - /share/man
+modules:
+  - name: git
+    make-args:
+      - INSTALL_SYMLINKS=1
+      - NO_PERL=YesPlease
+      - NO_TCLTK=YesPlease
+      - NO_PYTHON=YesPlease
+    make-install-args:
+      - INSTALL_SYMLINKS=1
+      - NO_PERL=YesPlease
+      - NO_TCLTK=YesPlease
+      - NO_PYTHON=YesPlease
+    post-install:
+      - find . -type f -name perllocal.pod -delete
+      - find ${FLATPAK_DEST}
+    sources:
+      - type: archive
+        sha256: 6d65132471df9e531807cb2746f8be317e22a343b9385bbe11c9ce7f0d2fc848
+        url: https://kernel.org/pub/software/scm/git/git-2.26.2.tar.xz
+    cleanup:
+      - /bin/git-receive-pack
+      - /bin/git-shell
+      - /bin/git-upload-archive
+      - /bin/git-upload-pack
+      - /bin/git-cvsserver
+  - name: ruby
+    config-opts:
+      --disable-install-doc
+    sources:
+      - type: archive
+        url: https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.1.tar.gz
+        sha256: d418483bdd0000576c1370571121a6eb24582116db0b7bb2005e90e250eae418
+  - name: bundler
+    buildsystem: simple
+    build-commands:
+       - gem install --local bundler-2.1.4.gem
+    sources:
+      - type: file
+        url: https://rubygems.org/downloads/bundler-2.1.4.gem
+        sha256: 50014d21d6712079da4d6464de12bb93c278f87c9200d0b60ba99f32c25af489
+    post-install:
+      - find ${FLATPAK_DEST}
+  - name: orb
+    build-commands:
+      - bundle install --local
+      - cp -ra bin config Gemfile Gemfile.lock lib LICENSE views ${FLATPAK_DEST}
+      - cp launch ${FLATPAK_DEST}/bin
+    buildsystem: simple
+    sources:
+      - type: script
+        commands:
+          - server &
+          - PID=$!
+          - sleep 1
+          - xdg-open http://127.0.0.1:4567
+          - wait $PID
+        dest-filename: launch
+      - type: git
+        url: ../..
+      - gems.yml
