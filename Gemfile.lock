@@ -62,7 +62,7 @@ GEM
       activesupport (>= 4.2.0)
     faker (2.10.1)
       i18n (>= 1.6, < 2)
-    git (1.6.0)
+    git (1.11.0)
       rchardet (~> 1.8)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
